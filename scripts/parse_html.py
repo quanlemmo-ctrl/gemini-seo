@@ -236,6 +236,11 @@ def main():
 
     args = parser.parse_args()
 
+    if args.file and args.file.startswith(("http://", "https://")):
+        if not args.url:
+            args.url = args.file
+        args.file = None
+
     if args.file:
         real_path = os.path.realpath(args.file)
         if not os.path.isfile(real_path):
@@ -243,12 +248,12 @@ def main():
             sys.exit(1)
         with open(real_path, "r", encoding="utf-8") as f:
             html = f.read()
+    elif args.url:
+        resp = safe_requests_get(args.url, timeout=30, allow_redirects=True)
+        html = resp.text
+        args.url = resp.url
     else:
         html = sys.stdin.read()
-        if not html and args.url:
-            resp = safe_requests_get(args.url, timeout=30, allow_redirects=True)
-            html = resp.text
-            args.url = resp.url
 
     result = parse_html(html, args.url)
 

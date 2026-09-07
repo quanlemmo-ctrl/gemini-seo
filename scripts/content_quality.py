@@ -257,7 +257,19 @@ def main() -> int:
     )
     args = parser.parse_args()
 
-    if args.source == "-":
+    if args.source.startswith(("http://", "https://")):
+        from url_safety import safe_requests_get
+        try:
+            from bs4 import BeautifulSoup
+            resp = safe_requests_get(args.source, timeout=30, allow_redirects=True)
+            soup = BeautifulSoup(resp.text, "lxml")
+            for elem in soup(["script", "style", "nav", "footer", "header", "noscript"]):
+                elem.decompose()
+            text = soup.get_text(separator=" ", strip=True)
+        except Exception:
+            resp = safe_requests_get(args.source, timeout=30, allow_redirects=True)
+            text = resp.text
+    elif args.source == "-":
         text = sys.stdin.read()
     else:
         text = Path(args.source).read_text(encoding="utf-8", errors="replace")
