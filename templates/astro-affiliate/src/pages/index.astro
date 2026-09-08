@@ -1,0 +1,111 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CouponCard from '../components/affiliate/CouponCard.astro';
+import { getCollection } from 'astro:content';
+
+const allDeals = await getCollection('deals');
+const allPosts = await getCollection('blog');
+const sortedPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<BaseLayout
+  title="Tested Coupons, Promo Codes & Unbiased Tech Reviews (2026)"
+  description="Discover hand-tested promo codes, exclusive discounts, and rigorous hands-on product reviews to help you buy smarter and save more."
+>
+  <!-- Hero Section -->
+  <section class="py-12 md:py-16 px-4 sm:px-6 bg-gradient-to-b from-white to-slate-50 dark:from-slate-900 dark:to-slate-950 border-b border-slate-200/80 dark:border-slate-800">
+    <div class="max-w-4xl mx-auto text-center space-y-5">
+      <span class="inline-flex items-center gap-1.5 text-xs uppercase font-extrabold tracking-wider text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950 px-3 py-1 rounded-full border border-emerald-200 dark:border-emerald-800">
+        ⚡ 100% Verified by Real Editors
+      </span>
+      <h1 class="text-3xl sm:text-5xl md:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
+        Never Pay Full Price. <br class="hidden sm:inline" />
+        <span class="text-emerald-600 dark:text-emerald-400">Buy Smarter.</span>
+      </h1>
+      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto font-normal leading-relaxed">
+        We test hundreds of coupons daily and conduct rigorous hands-on reviews so you never waste time on expired codes or low-quality gear.
+      </p>
+
+      <!-- Quick category pills -->
+      <div class="flex flex-wrap items-center justify-center gap-2 pt-2 text-xs font-semibold">
+        <a href="/deals" class="bg-white dark:bg-slate-800 hover:border-emerald-500 border border-slate-200 dark:border-slate-700 px-3.5 py-1.5 rounded-full shadow-sm">🔥 Trending Deals</a>
+        <a href="/blog" class="bg-white dark:bg-slate-800 hover:border-emerald-500 border border-slate-200 dark:border-slate-700 px-3.5 py-1.5 rounded-full shadow-sm">🎧 Audio Gear</a>
+        <a href="/deals" class="bg-white dark:bg-slate-800 hover:border-emerald-500 border border-slate-200 dark:border-slate-700 px-3.5 py-1.5 rounded-full shadow-sm">🌐 Web Hosting</a>
+        <a href="/stores" class="bg-white dark:bg-slate-800 hover:border-emerald-500 border border-slate-200 dark:border-slate-700 px-3.5 py-1.5 rounded-full shadow-sm">🏪 All Stores</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Deals & Coupons Section -->
+  <section class="max-w-5xl mx-auto px-4 sm:px-6 py-12 space-y-6">
+    <div class="flex items-center justify-between">
+      <div>
+        <h2 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
+          Featured Coupons & Promo Codes
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-500">Hand-tested today for maximum savings</p>
+      </div>
+      <a href="/deals" class="text-sm font-bold text-emerald-600 hover:text-emerald-700">View All Deals →</a>
+    </div>
+
+    <div class="space-y-4">
+      {allDeals.map((deal) => (
+        <CouponCard
+          title={deal.data.title}
+          store={deal.data.store}
+          discount={deal.data.discount}
+          code={deal.data.code}
+          description={deal.body}
+          expiryDate={deal.data.expiryDate}
+          affiliateUrl={deal.data.affiliateUrl}
+          verified={deal.data.verified}
+          exclusive={deal.data.exclusive}
+          usedCount={deal.data.usedCount}
+        />
+      ))}
+    </div>
+  </section>
+
+  <!-- Latest In-Depth Reviews Section -->
+  <section class="max-w-5xl mx-auto px-4 sm:px-6 py-12 border-t border-slate-200/80 dark:border-slate-800 space-y-6">
+    <div class="flex items-center justify-between">
+      <div>
+        <h2 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
+          Latest Hands-On Reviews
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-500">Unbiased lab testing and detailed buyer comparisons</p>
+      </div>
+      <a href="/blog" class="text-sm font-bold text-emerald-600 hover:text-emerald-700">All Reviews →</a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {sortedPosts.map((post) => (
+        <a
+          href={`/blog/${post.slug}`}
+          class="group block bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 shadow-sm hover:shadow-md hover:border-emerald-500/50 transition-all space-y-3"
+        >
+          <div class="flex items-center justify-between text-xs">
+            <span class="font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/80 px-2.5 py-0.5 rounded-full border border-emerald-200/60 dark:border-emerald-800">
+              {post.data.category}
+            </span>
+            {post.data.rating && (
+              <span class="font-black text-slate-900 dark:text-slate-100 flex items-center gap-1">
+                ★ {post.data.rating}/10
+              </span>
+            )}
+          </div>
+          <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-emerald-600 transition-colors leading-snug">
+            {post.data.title}
+          </h3>
+          <p class="text-sm text-slate-600 dark:text-slate-400 line-clamp-2">
+            {post.data.description}
+          </p>
+          <div class="text-xs text-slate-400 pt-2 flex items-center justify-between">
+            <span>By {post.data.author}</span>
+            <span>{post.data.pubDate.toLocaleDateString('en-US', { dateStyle: 'medium' })}</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

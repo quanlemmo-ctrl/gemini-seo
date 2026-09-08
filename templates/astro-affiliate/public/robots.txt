@@ -1,0 +1,22 @@
+# robots.txt optimized for Affiliate SEO & GEO Citability
+User-agent: *
+Allow: /
+Disallow: /go/
+
+# AI Search Crawlers allowed for maximum Generative Engine Optimization
+User-agent: GPTBot
+Allow: /
+Disallow: /go/
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /go/
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /go/
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://example.com/sitemap-index.xml

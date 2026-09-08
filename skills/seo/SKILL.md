@@ -55,6 +55,7 @@ extension is also installable (see "Optional Extensions" below).
 | `/seo dataforseo [command]` | Live SEO data via DataForSEO (extension) |
 | `/seo image-gen [use-case] <description>` | AI image generation for SEO assets (extension) |
 | `/seo flow [stage] [url\|topic]` | FLOW framework: evidence-led prompts for Find, Leverage, Optimize, Win, or Local stages |
+| `/seo review-writer [product\|item]` | In-depth affiliate review with Editorial Copywriting & VN fact-check dashboard |
 | `/seo setup` | Explicitly create or refresh the isolated Python runtime and Chromium |
 | `/seo doctor` | Check runtime readiness without changing the system |
 

@@ -1,0 +1,38 @@
+---
+export interface HeadingItem {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+export interface Props {
+  headings: HeadingItem[];
+}
+
+const { headings = [] } = Astro.props;
+const filteredHeadings = headings.filter((h) => h.depth === 2 || h.depth === 3);
+---
+
+{filteredHeadings.length > 1 && (
+  <nav class="my-6 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5">
+    <div class="flex items-center gap-2 font-bold text-sm text-slate-900 dark:text-slate-100 uppercase tracking-wider mb-3">
+      <svg class="w-4 h-4 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
+      </svg>
+      <span>Table of Contents</span>
+    </div>
+    <ul class="space-y-2 text-sm">
+      {filteredHeadings.map((heading) => (
+        <li class={heading.depth === 3 ? 'pl-4' : ''}>
+          <a
+            href={`#${heading.slug}`}
+            class="text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors flex items-center gap-1.5"
+          >
+            <span class="text-xs text-slate-400">•</span>
+            <span>{heading.text}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+)}

@@ -1,0 +1,42 @@
+---
+import redirectsData from '../../data/redirects.json';
+
+export async function getStaticPaths() {
+  return Object.entries(redirectsData).map(([slug, targetUrl]) => ({
+    params: { slug },
+    props: { targetUrl },
+  }));
+}
+
+export interface Props {
+  targetUrl: string;
+}
+
+const { targetUrl } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Redirecting to store...</title>
+    <meta http-equiv="refresh" content={`0;url=${targetUrl}`} />
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="canonical" href={targetUrl} />
+    <script is:inline define:vars={{ targetUrl }}>
+      window.location.replace(targetUrl);
+    </script>
+  </head>
+  <body class="bg-slate-50 text-slate-800 flex flex-col items-center justify-center min-h-screen p-4 text-center font-sans">
+    <div class="max-w-md p-6 bg-white rounded-2xl shadow-lg border border-slate-200 space-y-4">
+      <div class="w-12 h-12 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto text-xl animate-bounce">
+        ⚡
+      </div>
+      <h1 class="text-xl font-bold">Redirecting you to the offer...</h1>
+      <p class="text-sm text-slate-500">
+        If you are not redirected automatically within a few seconds,
+        <a href={targetUrl} rel="sponsored nofollow" class="text-emerald-600 font-bold underline">click here</a>.
+      </p>
+    </div>
+  </body>
+</html>

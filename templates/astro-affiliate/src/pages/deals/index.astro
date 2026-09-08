@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CouponCard from '../../components/affiliate/CouponCard.astro';
+import { getCollection } from 'astro:content';
+
+const allDeals = await getCollection('deals');
+---
+
+<BaseLayout
+  title="All Verified Coupons, Promo Codes & Discounts (2026)"
+  description="Browse our complete list of hand-verified promo codes and exclusive affiliate discounts."
+>
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 py-12 space-y-8">
+    <header class="space-y-2">
+      <h1 class="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white">
+        Today's Top Coupons & Promo Codes
+      </h1>
+      <p class="text-sm sm:text-base text-slate-600 dark:text-slate-400">
+        Every promo code is tested and verified daily by our savings specialists.
+      </p>
+    </header>
+
+    <div class="space-y-4">
+      {allDeals.map((deal) => (
+        <CouponCard
+          title={deal.data.title}
+          store={deal.data.store}
+          discount={deal.data.discount}
+          code={deal.data.code}
+          description={deal.body}
+          expiryDate={deal.data.expiryDate}
+          affiliateUrl={deal.data.affiliateUrl}
+          verified={deal.data.verified}
+          exclusive={deal.data.exclusive}
+          usedCount={deal.data.usedCount}
+        />
+      ))}
+    </div>
+  </div>
+</BaseLayout>

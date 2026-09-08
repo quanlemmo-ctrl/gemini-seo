@@ -96,6 +96,10 @@ integration + 2 extension mirrors), and 53 Python execution scripts.
 | `/seo profound [cmd]` | LLM brand-citation tracking (extension) |
 | `/seo seranking [cmd]` | AI share-of-voice tracking (extension) |
 | `/seo unlighthouse <url>` | Multi-page Lighthouse audits (extension) |
+| `/seo web-scaffold <site-name>` | Scaffold new Astro 5 affiliate site with independent Git repo |
+| `/seo web-affiliate [type]` | High-converting affiliate components (Coupons, Reviews, Comparison) |
+| `/seo review-writer <item>` | In-depth affiliate review with Editorial Copywriting & VN fact-check dashboard |
+| `/seo web-predeploy <path>` | Pre-deploy SEO, Schema, and Core Web Vitals audit |
 
 ## Using with Cursor / Cursor Cloud
 
@@ -162,6 +166,7 @@ skills/                    # 25 sub-skills (auto-discovered)
   seo-programmatic/       # Programmatic SEO
   seo-competitor-pages/   # Competitor pages
   seo-flow/               # FLOW framework integration
+  seo-review-writer/      # In-depth review with copywriting & VN fact-check
   seo-dataforseo/         # DataForSEO (extension)
   seo-image-gen/          # AI images (extension)
 agents/                    # 18 subagents

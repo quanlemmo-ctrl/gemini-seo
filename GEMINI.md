@@ -202,3 +202,26 @@ Mọi báo cáo SEO tổng thể phải được tạo thành file Markdown tron
   python3 run_seo.py drift baseline https://example.com
   python3 run_seo.py drift compare https://example.com
   ```
+* **Khởi tạo Website Affiliate con (Astro 5 + Tailwind)**:
+  ```bash
+  python3 scripts/web_scaffold.py <site-name> --domain https://example.com --title "Brand Name"
+  ```
+
+---
+
+## 6. Hệ Thống Xây Dựng & Vận Hành Website Affiliate (Website Studio)
+
+Dự án đóng vai trò là **Master Engine & Studio**. Mỗi website affiliate con được tạo ra sẽ nằm trong thư mục `sites/<site-name>` với các đặc điểm:
+
+1. **Git Repository độc lập**:
+   - Thư mục `sites/*` được repo mẹ bỏ qua trong `.gitignore`.
+   - Mỗi website con có `git init` riêng, kết nối với GitHub repo riêng và deploy tự động qua Cloudflare Pages / Vercel.
+2. **Bộ kỹ năng mở rộng (Web-Building Skills)**:
+   - `web-scaffold`: Tự động khởi tạo website affiliate từ template chuẩn SEO.
+   - `web-affiliate`: Hướng dẫn và sinh các thành phần UX chuyển đổi cao (Coupon Card, Wirecutter-style Review Box, Comparison Table, Pros & Cons, E-E-A-T Author Card).
+   - `seo-review-writer`: Sản xuất bài review/so sánh affiliate chuyên sâu ứng dụng Editorial Copywriting, chống ảo giác thông số kỹ thuật và tự động xuất Bảng đối soát sự thật song ngữ tiếng Việt.
+   - `web-predeploy`: Kiểm tra chất lượng SEO, schema, broken links và Core Web Vitals của bản build tĩnh (`dist/`) trước khi đẩy lên production.
+3. **Template Affiliate Chuẩn (`templates/astro-affiliate/`)**:
+   - Nền tảng Astro 5 + Tailwind CSS (Zero JavaScript mặc định, 100/100 Core Web Vitals).
+   - Tích hợp sẵn Link Cloaking an toàn tại `/go/[slug]` với `noindex, nofollow` và HTTP redirect.
+

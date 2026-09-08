@@ -47,6 +47,9 @@ env/
 
 # Node (if any)
 node_modules/
+**/node_modules/
+.astro/
+**/.astro/
 
 # Logs
 *.log
@@ -151,6 +154,11 @@ scripts/generate_setup_guide.py
 
 # Generated site builds
 site/
+
+# Multi-site workspace (each child site is an independent git repository)
+sites/*
+!sites/.gitkeep
+!sites/README.md
 
 # Git worktrees (isolated workspaces for parallel branch work)
 .worktrees/
