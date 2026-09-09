@@ -220,6 +220,7 @@ Dự án đóng vai trò là **Master Engine & Studio**. Mỗi website affiliate
    - `web-scaffold`: Tự động khởi tạo website affiliate từ template chuẩn SEO.
    - `web-affiliate`: Hướng dẫn và sinh các thành phần UX chuyển đổi cao (Coupon Card, Wirecutter-style Review Box, Comparison Table, Pros & Cons, E-E-A-T Author Card).
    - `seo-review-writer`: Sản xuất bài review/so sánh affiliate chuyên sâu ứng dụng Editorial Copywriting, chống ảo giác thông số kỹ thuật và tự động xuất Bảng đối soát sự thật song ngữ tiếng Việt.
+   - `facebook-post-writer`: Chuyển hóa bài viết website thành bài đăng Facebook chuẩn thuật toán Meta (chống bóp reach, phân loại gắn link qua First Comment, Direct Caption hoặc Comment-to-DM) kèm gợi ý Infographic.
    - `web-predeploy`: Kiểm tra chất lượng SEO, schema, broken links và Core Web Vitals của bản build tĩnh (`dist/`) trước khi đẩy lên production.
 3. **Template Affiliate Chuẩn (`templates/astro-affiliate/`)**:
    - Nền tảng Astro 5 + Tailwind CSS (Zero JavaScript mặc định, 100/100 Core Web Vitals).
